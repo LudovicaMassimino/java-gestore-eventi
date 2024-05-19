@@ -1,6 +1,7 @@
 package it.java.gestore.eventi;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Evento {
 	
@@ -23,8 +24,7 @@ public class Evento {
 		return titolo;
 	}
 
-	public void setTitolo(
-			String titolo) {
+	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
 
@@ -44,6 +44,60 @@ public class Evento {
 		return postiPrenotati;
 	}
 	
+	/* metodo controlloPrenota: se l’evento è già passato o non ha 
+	posti disponibili deve restituire un messaggio di avviso. */
 	
+	private boolean controlloPrenota() {
+		if (data.isBefore(LocalDate.now())) {
+			System.out.println("L'evento è già passato");
+			return false;
+		} else if(postiTotali < postiPrenotati){
+			System.out.println("Non ci sono posti disponibili");
+			return false;
+		}
+		return true;
+	}
 	
+	/* metodo controlloDisdici: se l’evento è già passato o non ci 
+	sono prenotazioni restituisce un messaggio di avviso. */ 
+	
+	private boolean controlloDisdici() {
+		if (data.isBefore(LocalDate.now())) {
+			System.out.println("L'evento è già passato");
+			return false;
+		} else if(postiPrenotati <= 0) {
+			System.out.println("Non hai effettuato prenotazioni da disdire");
+			return false ;
+		}
+		return true;
+	}
+	
+	// metodo per prenotare
+	public void prenota() {
+		if(controlloPrenota()) {
+			postiPrenotati++;
+		}
+	}
+	
+	// metodo per disdire
+	public void disdici() {
+		if(controlloDisdici()) {
+			postiPrenotati--;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return data.format(formatter) + " - " + titolo;
+	}
 }
+
+
+
+
+
+
+
+
+
