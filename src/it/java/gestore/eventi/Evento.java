@@ -45,9 +45,9 @@ public class Evento {
 	}
 	
 	/* metodo controlloPrenota: se l’evento è già passato o non ha 
-	posti disponibili deve restituire un messaggio di avviso. */
+	posti disponibili deve restituire due messaggi di avviso. */
 	
-	private boolean controlloPrenota() {
+	public boolean controlloPrenota() {
 		if (data.isBefore(LocalDate.now())) {
 			System.out.println("L'evento è già passato");
 			return false;
@@ -61,7 +61,7 @@ public class Evento {
 	/* metodo controlloDisdici: se l’evento è già passato o non ci 
 	sono prenotazioni restituisce un messaggio di avviso. */ 
 	
-	private boolean controlloDisdici() {
+	public boolean controlloDisdici() {
 		if (data.isBefore(LocalDate.now())) {
 			System.out.println("L'evento è già passato");
 			return false;
@@ -74,8 +74,10 @@ public class Evento {
 	
 	// metodo per prenotare
 	public void prenota() {
-		if(controlloPrenota()) {
+		if (controlloPrenota()) {
 			postiPrenotati++;
+		} else {
+			System.out.println("Errore: non ci sono abbastanza posti disponibili.");
 		}
 	}
 	
@@ -83,8 +85,10 @@ public class Evento {
 	public void disdici() {
 		if(controlloDisdici()) {
 			postiPrenotati--;
+		} else {
+			System.out.println("Errore: non ci sono prenotazioni da disdire");
 		}
-	}
+    }
 	
 	@Override
 	public String toString() {
