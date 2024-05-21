@@ -11,7 +11,7 @@ public class Concerto extends Evento {
 
     // construttore
     public Concerto() {
-        super("Concerto di Coldplay - X&Y - Milano", LocalDate.of(2024, 7, 25), 5000);
+        super("Concerto di Coldplay - X&Y - Milano", LocalDate.of(2005, 7, 03), 13000);
         this.ora = LocalTime.of(20, 30);
         this.prezzo = 104.99;
     }
