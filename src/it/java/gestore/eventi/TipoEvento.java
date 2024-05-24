@@ -2,6 +2,9 @@ package it.java.gestore.eventi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class TipoEvento {
     private List<String> tipoEventoArray;
