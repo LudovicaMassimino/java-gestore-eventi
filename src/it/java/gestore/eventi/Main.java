@@ -90,7 +90,7 @@ public class Main {
         int postiPrenotati = input.nextInt();
         input.nextLine();
 
-        // inizializzo un oggetto myEvento di tipo Evento
+        // inizializzo l'oggetto myEvento di tipo Evento
         Evento myEvento = new Evento(titoloInput, data, postiTotali);
 
         // controllo data
@@ -117,7 +117,7 @@ public class Main {
         System.out.printf("Ci sono ancora n° %s posti disponibili. \n",
                 (myEvento.getPostiTotali() - myEvento.getPostiPrenotati()));
 
-        System.out.println("Evento creato: " + myEvento.toString());
+        // System.out.println("Evento creato: " + myEvento.toString());
 
         // chiedo all'utente quante prenotazioni vuole disdire
         System.out.println("Vuoi disdire un posto/posti?");
@@ -148,7 +148,7 @@ public class Main {
 
         // Messaggio riepilogativo
         System.out.printf("Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
-                tipoEventoScelto.toLowerCase(), titoloInput, dataFormattata, ora, prezzoFormattato);
+                tipoEventoScelto, titoloInput, dataFormattata, ora, prezzoFormattato);
 
         input.close();
     }
