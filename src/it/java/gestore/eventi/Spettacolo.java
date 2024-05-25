@@ -5,12 +5,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Concerto extends Evento {
+public class Spettacolo extends Evento {
     private LocalTime ora;
     private double prezzo;
 
     // construttore
-    public Concerto(String titolo, LocalDate data, LocalTime ora, int postiTotali, double prezzo) {
+    public Spettacolo(String titolo, LocalDate data, LocalTime ora, int postiTotali, double prezzo) {
         super(titolo, data, postiTotali);
         this.ora = ora;
         this.prezzo = prezzo;
