@@ -44,51 +44,23 @@ public class Evento {
         return postiPrenotati;
     }
 
-    /*
-     * metodo controlloPrenota: se l’evento è già passato o non ha posti disponibili
-     * deve restituire due messaggi di avviso.
-     */
-
-    public boolean controlloPrenota() {
-        if (data.isBefore(LocalDate.now())) {
-            System.out.println("L'evento è già passato");
-            return false;
-        } else if (postiTotali < postiPrenotati) {
-            System.out.println("Non ci sono posti disponibili");
-            return false;
-        }
-        return true;
-    }
-
-    /*
-     * metodo controlloDisdici: se l’evento è già passato o non ci sono prenotazioni
-     * restituisce un messaggio di avviso.
-     */
-
-    public boolean controlloDisdici() {
-        if (data.isBefore(LocalDate.now())) {
-            System.out.println("L'evento è già passato");
-            return false;
-        } else if (postiPrenotati <= 0) {
-            System.out.println("Non hai effettuato prenotazioni da disdire");
-            return false;
-        }
-        return true;
-    }
-
     // metodo per prenotare
     public void prenota() {
-        if (controlloPrenota()) {
-            postiPrenotati++;
+        if (data.isBefore(LocalDate.now())) {
+            System.out.println("L'evento è già passato");
+        } else if (postiTotali > postiPrenotati) {
+            postiPrenotati += 1;
         } else {
-            System.out.println("Errore: non ci sono abbastanza posti disponibili.");
+            System.out.println("Errore: non ci sono abbastanza posti disponibili");
         }
     }
 
     // metodo per disdire
     public void disdici() {
-        if (controlloDisdici()) {
-            postiPrenotati--;
+        if (data.isBefore(LocalDate.now())) {
+            System.out.println("L'evento è già passato");
+        } else if (postiTotali > postiPrenotati) {
+            postiPrenotati -= 1;
         } else {
             System.out.println("Errore: non ci sono prenotazioni da disdire");
         }
