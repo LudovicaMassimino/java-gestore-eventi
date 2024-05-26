@@ -1,12 +1,11 @@
 package it.java.gestore.eventi;
 
 import java.text.NumberFormat;
-import java.util.Locale;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +17,7 @@ public class Main {
 
         int tipoEvento = input.nextInt();
         input.nextLine(); // per consumare il newline
+        String tipoEventoNome = "";
 
         // Chiedo all'utente di inserire i dettagli dell'evento:
 
@@ -76,12 +76,15 @@ public class Main {
         switch (tipoEvento) {
             case 1:
                 myEvento = new Concerto(titoloInput, data, ora, postiTotali, prezzo);
+                tipoEventoNome = "concerto";
                 break;
             case 2:
                 myEvento = new Spettacolo(titoloInput, data, ora, postiTotali, prezzo);
+                tipoEventoNome = "spettacolo";
                 break;
             case 3:
                 myEvento = new Conferenza(titoloInput, data, ora, postiTotali, prezzo);
+                tipoEventoNome = "conferenza";
                 break;
             default:
                 System.out.println("Evento inserito non valido");
@@ -123,9 +126,38 @@ public class Main {
 
         // Formattazione data finale
         String dataFormattata = data.format(dateFormatter);
+        // Formattazione prezzo finale
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.ITALY);
+        String prezzoFormattato = currencyFormatter.format(prezzo);
 
         // Messaggio riepilogativo
         System.out.printf("Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
-                tipoEvento, titoloInput, dataFormattata, ora, ((Concerto) myEvento).getPrezzoFormattato());
+                tipoEventoNome, titoloInput, dataFormattata, ora, prezzoFormattato);
+
+        // Creazione del programma eventi
+
+        ProgrammEventi myProgrammEventi = new ProgrammEventi("Programma Eventi");
+
+        // Aggiunta degli eventi al programma
+        Evento evento1 = new Evento("Coldplay. X&Y", LocalDate.now(), 60000);
+        Evento evento2 = new Evento("Teresa Mannino. Sono nata il ventitré.", LocalDate.now().plusDays(30), 1000);
+        Evento evento3 = new Evento("Tedx", LocalDate.now().plusDays(100), 3000);
+        Evento evento4 = new Evento("Ludovico Einaudi", LocalDate.now().plusDays(200), 30000);
+        Evento evento5 = new Evento("Apologia di Socrate", LocalDate.now().plusDays(300), 1000);
+        Evento evento6 = new Evento("Conferenza sulla termodinamica", LocalDate.now().plusDays(600), 3000);
+
+        myProgrammEventi.aggiungiEvento(evento1);
+        myProgrammEventi.aggiungiEvento(evento2);
+        myProgrammEventi.aggiungiEvento(evento3);
+        myProgrammEventi.aggiungiEvento(evento4);
+        myProgrammEventi.aggiungiEvento(evento5);
+        myProgrammEventi.aggiungiEvento(evento6);
+        myProgrammEventi.aggiungiEvento(myEvento);
+
+        // Stampare gli eventi presenti nel programma, ordinati per data
+        String eventiOrdinati = myProgrammEventi.getEventiOrdinatiPerData();
+        System.out.println("\nEventi nel programma (ordinati per data):\n" + eventiOrdinati);
+
+        input.close();
     }
 }
