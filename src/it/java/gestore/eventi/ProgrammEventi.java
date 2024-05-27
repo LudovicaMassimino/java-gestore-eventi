@@ -15,6 +15,21 @@ public class ProgrammEventi {
     public ProgrammEventi(String titolo) {
         this.titolo = titolo;
         this.eventi = new ArrayList<>();
+        // creazione eventi fissi aggiunti al programma
+        Evento evento1 = new Evento("Coldplay. X&Y", LocalDate.now(), 60000);
+        aggiungiEvento(evento1);
+        Evento evento2 = new Evento("Teresa Mannino. Sono nata il ventitré.", LocalDate.now().plusDays(30), 1000);
+        aggiungiEvento(evento2);
+        Evento evento3 = new Evento("Tedx", LocalDate.now().plusDays(100), 3000);
+        aggiungiEvento(evento3);
+        Evento evento4 = new Evento("Ludovico Einaudi", LocalDate.now().plusDays(200),
+                30000);
+        aggiungiEvento(evento4);
+        Evento evento5 = new Evento("Apologia di Socrate", LocalDate.now().plusDays(300), 1000);
+        aggiungiEvento(evento5);
+        Evento evento6 = new Evento("Conferenza sulla termodinamica", LocalDate.now().plusDays(600), 3000);
+        aggiungiEvento(evento6);
+
     }
 
     // Metodo per aggiungere un evento alla lista
