@@ -13,11 +13,11 @@ public class Main {
         Scanner input = new Scanner(System.in);
         System.out.println("\n\n\n       CREA IL TUO EVENTO");
         System.out.println(
-                "\nQuale tipo di evento vuoi creare? \nScegli tra questi:\n [1] Concerto\n [2] Spettacolo\n [3] Conferenza\n");
+                "\nQuale tipo di evento vuoi creare? \n   Scegli tra questi:\n   [1] Concerto\n   [2] Spettacolo\n   [3] Conferenza\n");
 
         int tipoEvento = input.nextInt();
         input.nextLine(); // per consumare il newline
-        String tipoEventoNome = "";
+        String tipoEventoNome = ""; // per la stampa del messaggio riepilogativo
 
         // Chiedo all'utente di inserire i dettagli dell'evento:
 
@@ -37,14 +37,16 @@ public class Main {
             try {
                 data = LocalDate.parse(dataInput, dateFormatter);
                 if (data.isBefore(LocalDate.now())) {
-                    System.out.println("L'evento è già passato. Inserisci una data valida.");
+                    System.out.println("    L'evento è già passato. Inserisci una data valida.");
                 } else {
                     dataValida = true;
                 }
             } catch (DateTimeParseException e) {
-                System.out.println("Formato data non valido. Inserisci una data nel formato dd/MM/yyyy.");
+                System.out.println("    Formato data non valido. Inserisci una data nel formato dd/MM/yyyy.");
             }
         }
+        // Formattazione data finale
+        String dataFormattata = data.format(dateFormatter);
 
         // ORA
         LocalTime ora = null;
@@ -59,14 +61,20 @@ public class Main {
                 System.out.println("Formato ora non valido. Inserisci un'orario nel formato HH:mm.");
             }
         }
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        // Formattazione ora finale
+        String oraFormattata = ora.format(timeFormatter);
 
         // PREZZO
         System.out.println("Inserisci il prezzo del biglietto:");
-        double prezzo = input.nextDouble();
+        double prezzoInput = input.nextDouble();
+        // // Formattazione prezzo finale
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.ITALY);
+        String prezzoFormattato = currencyFormatter.format(prezzoInput);
 
         // POSTI TOTALI
         System.out.println("Inserisci il numero totale di posti: ");
-        int postiTotali = input.nextInt();
+        int postiTotaliInput = input.nextInt();
         input.nextLine();
 
         // creo l'evento in base al tipo scelto
@@ -75,15 +83,15 @@ public class Main {
 
         switch (tipoEvento) {
             case 1:
-                myEvento = new Concerto(titoloInput, data, ora, postiTotali, prezzo);
+                myEvento = new Concerto(titoloInput, data, ora, postiTotaliInput, prezzoInput);
                 tipoEventoNome = "concerto";
                 break;
             case 2:
-                myEvento = new Spettacolo(titoloInput, data, ora, postiTotali, prezzo);
+                myEvento = new Spettacolo(titoloInput, data, ora, postiTotaliInput, prezzoInput);
                 tipoEventoNome = "spettacolo";
                 break;
             case 3:
-                myEvento = new Conferenza(titoloInput, data, ora, postiTotali, prezzo);
+                myEvento = new Conferenza(titoloInput, data, ora, postiTotaliInput, prezzoInput);
                 tipoEventoNome = "conferenza";
                 break;
             default:
@@ -92,20 +100,20 @@ public class Main {
         }
         // Prenotazioni
         System.out.println("Quanti posti vuoi prenotare?");
-        int postiPrenotati = input.nextInt();
+        int postiPrenotatiInput = input.nextInt();
         input.nextLine();
 
-        for (int i = 0; i < postiPrenotati; i++) {
+        for (int i = 0; i < postiPrenotatiInput; i++) {
             myEvento.prenota();
         }
 
         // stampo i posti prenotati
-        System.out.printf("Hai prenotato n° %s posti. \n", myEvento.getPostiPrenotati());
-        System.out.printf("Ci sono ancora n° %s posti disponibili. \n",
+        System.out.printf("   Hai prenotato n° %s posti. \n", myEvento.getPostiPrenotati());
+        System.out.printf("   Ci sono ancora n° %s posti disponibili. \n",
                 (myEvento.getPostiTotali() - myEvento.getPostiPrenotati()));
 
         // Didette
-        System.out.println("Vuoi disdire un posto/posti?");
+        System.out.printf("\nVuoi disdire un posto/posti?\n");
         String risposta = input.nextLine();
         if (risposta.equalsIgnoreCase("si")) {
             System.out.println("Quanti posti vuoi disdire?");
@@ -114,29 +122,27 @@ public class Main {
             for (int i = 0; i < disdette; i++) {
                 myEvento.disdici();
             }
-            System.out.printf("Hai disdetto n° %d posti.\n", disdette);
+            System.out.printf("   Hai disdetto n° %d posti.\n", disdette);
         } else if (risposta.equalsIgnoreCase("no")) {
-            System.out.printf("Hai disdetto n° 0 posti. \n");
+            System.out.printf("   Hai disdetto n° 0 posti. \n");
         }
 
         // stampa aggiornata dopo eventuale disdetta
-        System.out.printf("Hai prenotato n° %s posti. \n", myEvento.getPostiPrenotati());
-        System.out.printf("Ci sono ancora n° %s posti disponibili. \n",
+        System.out.printf("   Hai prenotato n° %s posti. \n", myEvento.getPostiPrenotati());
+        System.out.printf("   Ci sono ancora n° %s posti disponibili. \n",
                 (myEvento.getPostiTotali() - myEvento.getPostiPrenotati()));
 
-        // Formattazione data finale
-        String dataFormattata = data.format(dateFormatter);
-        // Formattazione prezzo finale
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.ITALY);
-        String prezzoFormattato = currencyFormatter.format(prezzo);
+        // Messaggio riepilogativo versione secondo consegna
+        System.out.printf("\n\nRIEPILOGO:\n\n   %s %s - \"%s\" - %s.\n",
+                dataFormattata, oraFormattata, titoloInput, prezzoFormattato);
 
-        // Messaggio riepilogativo
-        System.out.printf("Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
-                tipoEventoNome, titoloInput, dataFormattata, ora, prezzoFormattato);
+        // Messaggio riepilogativo seconda versione
+        System.out.printf("\n   Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
+                tipoEventoNome, titoloInput, dataFormattata, oraFormattata, prezzoFormattato);
 
         // Creazione del programma eventi
 
-        ProgrammEventi myProgrammEventi = new ProgrammEventi("Programma Eventi");
+        ProgrammEventi myProgrammEventi = new ProgrammEventi("\n\nPROGRAMMA EVENTI(ordinati per data):\n");
 
         // Aggiunta degli eventi al programma
         Evento evento1 = new Evento("Coldplay. X&Y", LocalDate.now(), 60000);
@@ -156,7 +162,7 @@ public class Main {
 
         // Stampare gli eventi presenti nel programma, ordinati per data
         String eventiOrdinati = myProgrammEventi.getEventiOrdinatiPerData();
-        System.out.println("\nEventi nel programma (ordinati per data):\n" + eventiOrdinati);
+        System.out.println(eventiOrdinati);
 
         input.close();
     }

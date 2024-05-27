@@ -55,7 +55,7 @@ public class ProgrammEventi {
         });
 
         // Costruisci la stringa con tutti gli eventi
-        String risultato = titolo + ":\n";
+        String risultato = titolo + "   \n";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         /*
@@ -64,7 +64,7 @@ public class ProgrammEventi {
          * Evento evento = eventi.get(i);
          */
         for (Evento myEvento : eventi) {
-            risultato = String.format("%s- %s - %s\n", risultato, myEvento.getData().format(formatter),
+            risultato = String.format("%s   ➤ %s - %s\n", risultato, myEvento.getData().format(formatter),
                     myEvento.getTitolo());
         }
 

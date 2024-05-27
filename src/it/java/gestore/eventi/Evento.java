@@ -15,7 +15,6 @@ public class Evento {
         this.data = data;
         this.postiTotali = postiTotali;
         this.postiPrenotati = 0;
-
     }
 
     // getter e setter

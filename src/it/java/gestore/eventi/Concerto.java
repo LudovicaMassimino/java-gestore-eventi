@@ -38,7 +38,7 @@ public class Concerto extends Evento {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        return getData().format(dateFormatter) + " " + ora.format(timeFormatter);
+        return getData().format(dateFormatter) + " - " + ora.format(timeFormatter);
     }
 
     // metodo per formattare il prezzo
