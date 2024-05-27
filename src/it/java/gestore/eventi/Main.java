@@ -133,8 +133,8 @@ public class Main {
                 (myEvento.getPostiTotali() - myEvento.getPostiPrenotati()));
 
         // Messaggio riepilogativo versione secondo consegna
-        System.out.printf("\n\nRIEPILOGO:\n\n   %s %s - \"%s\" - %s.\n",
-                dataFormattata, oraFormattata, titoloInput, prezzoFormattato);
+        System.out.printf("\n\nRIEPILOGO:\n\n   %s\n",
+                myEvento.toString());
 
         // Messaggio riepilogativo seconda versione
         System.out.printf("\n   Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
@@ -144,20 +144,8 @@ public class Main {
 
         ProgrammEventi myProgrammEventi = new ProgrammEventi("\n\nPROGRAMMA EVENTI(ordinati per data):\n");
 
-        // Aggiunta degli eventi al programma
-        Evento evento1 = new Evento("Coldplay. X&Y", LocalDate.now(), 60000);
-        Evento evento2 = new Evento("Teresa Mannino. Sono nata il ventitré.", LocalDate.now().plusDays(30), 1000);
-        Evento evento3 = new Evento("Tedx", LocalDate.now().plusDays(100), 3000);
-        Evento evento4 = new Evento("Ludovico Einaudi", LocalDate.now().plusDays(200), 30000);
-        Evento evento5 = new Evento("Apologia di Socrate", LocalDate.now().plusDays(300), 1000);
-        Evento evento6 = new Evento("Conferenza sulla termodinamica", LocalDate.now().plusDays(600), 3000);
+        // Aggiungo myEvento nel programmEventi
 
-        myProgrammEventi.aggiungiEvento(evento1);
-        myProgrammEventi.aggiungiEvento(evento2);
-        myProgrammEventi.aggiungiEvento(evento3);
-        myProgrammEventi.aggiungiEvento(evento4);
-        myProgrammEventi.aggiungiEvento(evento5);
-        myProgrammEventi.aggiungiEvento(evento6);
         myProgrammEventi.aggiungiEvento(myEvento);
 
         // Stampare gli eventi presenti nel programma, ordinati per data
