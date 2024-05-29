@@ -24,7 +24,7 @@ public class Main {
         // Chiedo all'utente di inserire i dettagli dell'evento:
 
         // TITOLO
-        System.out.println("\nInserisci il titolo dell'evento:");
+        System.out.println("\nInserisci il titolo dell'evento:\033[1;94m");
         String titoloInput = input.nextLine();
 
         // DATA
@@ -33,7 +33,7 @@ public class Main {
         boolean dataValida = false;
         while (!dataValida) {
             System.out.printf(
-                    "\nInserisci la data dell'evento \033[1;94m\"%s\"\033[0m (formato dd/MM/yyyy):\n",
+                    "\n\033[0mInserisci la data dell'evento \033[1;94m\"%s\"\033[0m (formato dd/MM/yyyy):\n",
                     titoloInput);
 
             String dataInput = input.nextLine();
