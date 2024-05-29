@@ -58,7 +58,8 @@ public class Main {
         boolean oraValida = false;
         while (!oraValida) {
             try {
-                System.out.printf("Inserisci l'ora dell'evento \"%s\" (formato HH:mm):\n", titoloInput);
+                System.out.printf("Inserisci l'ora dell'evento \033[1;94m\"%s\"\033[0m (formato HH:mm):\n",
+                        titoloInput);
                 String oraInput = input.nextLine();
                 ora = LocalTime.parse(oraInput);
                 oraValida = true;
@@ -139,12 +140,12 @@ public class Main {
                 (myEvento.getPostiTotali() - myEvento.getPostiPrenotati()));
 
         // Messaggio riepilogativo versione secondo consegna
-        System.out.printf("\n\nRIEPILOGO:\n\n   %s\n",
+        System.out.printf("\n\n\033[0;107m\033[1;90mRIEPILOGO:\033[0m\n\n   %s\n",
                 myEvento.toString());
 
         // Messaggio riepilogativo seconda versione
         System.out.printf(
-                "\n   Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
+                "\n   Hai creato l'evento %s \033[1;94m\"%s\"\033[0m che si svolgerà il %s alle ore %s al costo di %s.\n",
                 tipoEventoNome, titoloInput, dataFormattata, oraFormattata, prezzoFormattato);
 
         // Creazione del programma eventi
