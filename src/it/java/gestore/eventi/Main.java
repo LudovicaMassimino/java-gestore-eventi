@@ -11,7 +11,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("\n\n\n       CREA IL TUO EVENTO");
+        System.out.println("\n\n\n       \033[0;104m                      \033[0m");
+        System.out.println("       \033[0;104m  \033[1;97mCREA IL TUO EVENTO  \033[0m");
+        System.out.println("       \033[0;104m                      \033[0m");
         System.out.println(
                 "\nQuale tipo di evento vuoi creare? \n   Scegli tra questi:\n   [1] Concerto\n   [2] Spettacolo\n   [3] Conferenza\n");
 
@@ -30,19 +32,22 @@ public class Main {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // formattazione della data
         boolean dataValida = false;
         while (!dataValida) {
-            System.out.printf("\nInserisci la data dell'evento \"%s\" (formato dd/MM/yyyy):\n", titoloInput);
+            System.out.printf(
+                    "\nInserisci la data dell'evento \033[1;94m\"%s\"\033[0m (formato dd/MM/yyyy):\n",
+                    titoloInput);
 
             String dataInput = input.nextLine();
 
             try {
                 data = LocalDate.parse(dataInput, dateFormatter);
                 if (data.isBefore(LocalDate.now())) {
-                    System.out.println("    L'evento è già passato. Inserisci una data valida.");
+                    System.out.println("    \033[0;91mL'evento è già passato. Inserisci una data valida.\033[0m");
                 } else {
                     dataValida = true;
                 }
             } catch (DateTimeParseException e) {
-                System.out.println("    Formato data non valido. Inserisci una data nel formato dd/MM/yyyy.");
+                System.out.println(
+                        "    \033[0;91mFormato data non valido. Inserisci una data nel formato dd/MM/yyyy.\033[0m");
             }
         }
         // Formattazione data finale
@@ -58,7 +63,8 @@ public class Main {
                 ora = LocalTime.parse(oraInput);
                 oraValida = true;
             } catch (DateTimeParseException e) {
-                System.out.println("Formato ora non valido. Inserisci un'orario nel formato HH:mm.");
+                System.out
+                        .println("    \033[0;91mFormato ora non valido. Inserisci un'orario nel formato HH:mm.\033[0m");
             }
         }
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -95,7 +101,7 @@ public class Main {
                 tipoEventoNome = "conferenza";
                 break;
             default:
-                System.out.println("Evento inserito non valido");
+                System.out.println("\033[0mEvento inserito non valido\033[0m");
                 break;
         }
         // Prenotazioni
@@ -137,12 +143,14 @@ public class Main {
                 myEvento.toString());
 
         // Messaggio riepilogativo seconda versione
-        System.out.printf("\n   Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
+        System.out.printf(
+                "\n   Hai creato l'evento %s \"%s\" che si svolgerà il %s alle ore %s al costo di %s.\n",
                 tipoEventoNome, titoloInput, dataFormattata, oraFormattata, prezzoFormattato);
 
         // Creazione del programma eventi
 
-        ProgrammEventi myProgrammEventi = new ProgrammEventi("\n\nPROGRAMMA EVENTI(ordinati per data):\n");
+        ProgrammEventi myProgrammEventi = new ProgrammEventi(
+                "\n\n\033[0;102m\033[1;90mPROGRAMMA EVENTI(ordinati per data):\033[0m\n");
 
         // Aggiungo myEvento nel programmEventi
 
