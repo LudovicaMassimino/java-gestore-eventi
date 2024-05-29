@@ -140,7 +140,7 @@ public class Main {
                 (myEvento.getPostiTotali() - myEvento.getPostiPrenotati()));
 
         // Messaggio riepilogativo versione secondo consegna
-        System.out.printf("\n\n\033[0;107m\033[1;90mRIEPILOGO:\033[0m\n\n   %s\n",
+        System.out.printf("\n\n\033[1;97mRIEPILOGO:\033[0m\n\n   %s\n",
                 myEvento.toString());
 
         // Messaggio riepilogativo seconda versione
@@ -153,6 +153,7 @@ public class Main {
         ProgrammEventi myProgrammEventi = new ProgrammEventi(
                 "\n\n\033[0;102m\033[1;90mPROGRAMMA EVENTI(ordinati per data):\033[0m\n");
 
+        myEvento.setTitolo("\033[1;94m" + titoloInput + "\033[0m");
         // Aggiungo myEvento nel programmEventi
 
         myProgrammEventi.aggiungiEvento(myEvento);

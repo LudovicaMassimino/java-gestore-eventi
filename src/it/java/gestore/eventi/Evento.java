@@ -22,8 +22,7 @@ public class Evento {
         return titolo;
     }
 
-    public void setTitolo(
-            String titolo) {
+    public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
