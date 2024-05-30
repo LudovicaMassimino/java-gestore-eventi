@@ -153,9 +153,10 @@ public class Main {
         ProgrammEventi myProgrammEventi = new ProgrammEventi(
                 "\n\n\033[0;102m\033[1;90mPROGRAMMA EVENTI(ordinati per data):\033[0m\n");
 
+        // per distinguere l'evento creato dagli eventi fissi, con stringa o colore
         myEvento.setTitolo("\033[1;94m" + titoloInput + "\033[0m");
-        // Aggiungo myEvento nel programmEventi
 
+        // Aggiungo myEvento nel programmEventi
         myProgrammEventi.aggiungiEvento(myEvento);
 
         // Stampare gli eventi presenti nel programma, ordinati per data
